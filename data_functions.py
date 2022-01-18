@@ -61,7 +61,7 @@ def get_transforms(cfg):
     augmentations = [getattr(A, item["name"])(**item["params"]) for item in cfg.augmentations]
     post_transforms = [getattr(A, item["name"])(**item["params"]) for item in cfg.post_transforms]
 
-    # splitting on train and test transforms
+    # concatenate transforms
     train = A.Compose(pre_transforms + augmentations + post_transforms)
     test = A.Compose(pre_transforms + post_transforms)
     return train, test
