@@ -1,7 +1,7 @@
 import argparse
 import os
 import cv2
-from production import make_masks, data_to_paths, create_folder, get_setup, make_legend
+from src.production import make_masks, data_to_paths, create_folder, get_setup, make_legend
 
 # parser arguments
 parser = argparse.ArgumentParser()

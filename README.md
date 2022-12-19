@@ -1,35 +1,77 @@
-# AIIJC. Трек "ИИ в медицине"
+# AIIJC. The "AI in Medicine" competition track"
 
-## Данные
+## Overview
 
-* [MosMedData: результаты исследований компьютерной томографии органов грудной клетки с признаками COVID-19](https://mosmed.ai/datasets/covid19_1110/)  
-* [MedSeg: COVID-19 CT segmentation dataset](http://medicalsegmentation.com/covid19/)
-* [Zenodo: COVID-19 CT Lung and Infection Segmentation Dataset](https://zenodo.org/record/3757476#.YRqU0IgzbP_)
+Artifical Intelligence International Junior Contest (AIIJC) has 10 tracks on different themes. \
+This repository contains the code for the "AI in Medicine" track. \
+Specific of competition is that all participants must be under 18 years old. \
 
-## Запуск кода 
+The main organizer and sponsor of the competition is Sberbank. \
+Organizer and task developer is Alliance for Artificial Intelligence.
 
-Для запуска сайта: `streamlit run app.py`
+## Data
 
-Для запуска предсказания: `python3 inference.py -h`
+Competition don't provide any data. \
+So we find 3 datasets for training and testing our models:
 
-## Структура проекта
-- **app.py** - код сайта
-- **main.py** - главный модуль, запускается для тренировки
-- **config.py** - файл конфигураций
-- **data_functions.py** - модули подготовки данных для обучения
-- **train_functions.py** - модули тренировки и валидации
-- **productions.py** - методы подготовки тестовых данных для предсказания
-- **utils.py** - вспомогательные модули
-- **custom** - содержит кастомные модули
-  - losses.py - кастомные функции потерь 
-  - metrics.py - кастомные метрики
-  - models.py - кастомные классы моделей
-- **requirements.txt** - файл зависимостей
-- **checkpoints**
-  - Binary.pth
-  - MultiClass.pth
-  - Lungs.pth
+* [MosMedData](https://mosmed.ai/datasets/covid19_1110/)
+* [MedSeg](http://medicalsegmentation.com/covid19/)
+* [Zenodo](https://zenodo.org/record/3757476#.YRqU0IgzbP_)
 
-Папку checkpoints скачать [тут](https://drive.google.com/file/d/19svztOBB4RhnW7cwuZTDPZb0EiWKdydN/view?usp=sharing)
+## Methods
 
-[Тренировка](https://drive.google.com/drive/folders/1AawFssvVRtF3lZIr6nOvObcH41Gu4rIE?usp=sharing) происходила на Google Colab Pro
+### Pathology segmentation
+
+For this task we used:
+
+* 2 pretrained Unet++ with backbone EfficientNet-B7 for 2 classes: \
+  COVID-19 ground glass and COVID-19 consolidation.
+* Loss function is IoU
+* Optimizer is Adam with learning rate 1e-4
+
+### Lungs segmentation
+
+Our task need percentage of pathologies per lung. \
+So we need to segment lungs. \
+For this task we prepared specific computer vision pipeline.
+
+1. The mask of pathology was subtracted from the image
+   We did it because pathology prevents
+   us from seeing the lungs (they are totally black, pathology - gray/white).
+2. Find 2 largest contours in the image
+   The contours are the lungs.
+3. Delete image by half and find max overlaps for each contour with half of the image.
+   Here we find the lungs that are on the left and right. (in dicom we have info about the side of the image)
+4. Cut mask of pathology by contours of lungs
+   Our model isn't perfect, so we need to cut the mask of pathology by contours of lungs.
+   This was we reached better accuracy.
+5. Calculate percentage of pathology per lung
+
+Let's see how it works in images:
+...
+
+## Results
+
+...
+
+## Run code
+
+First of all set up your environment with
+Install folder with model
+checkpoints: [link](https://drive.google.com/file/d/19svztOBB4RhnW7cwuZTDPZb0EiWKdydN/view?usp=sharing)
+
+```bash
+pip install -r requirements.txt
+```
+
+To activate web interface run
+
+```bash
+streamlit run streamlit_app.py
+```
+
+To activate app in bash run
+
+```bash
+python3 bash_app.py --data <image folder> --save_folder <dst folder> --multi --show_legend
+```

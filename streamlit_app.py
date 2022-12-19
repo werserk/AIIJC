@@ -1,12 +1,10 @@
 import streamlit as st
 from PIL import Image
 import numpy as np
-import custom.models
 from zipfile import ZipFile
 import os
 import cv2
-from production import read_files, get_setup, make_masks, create_folder, make_legend
-import shutil
+from src.production import read_files, get_setup, make_masks, create_folder, make_legend
 
 
 @st.cache
