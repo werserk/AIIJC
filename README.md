@@ -1,10 +1,10 @@
 # AIIJC. The "AI in Medicine" competition track"
 
-## Overview
+## Competiton overview
 
 Artifical Intelligence International Junior Contest (AIIJC) has 10 tracks on different themes. \
 This repository contains the code for the "AI in Medicine" track. \
-Specific of competition is that all participants must be under 18 years old. \
+Specific of competition is that all participants must be under 18 years old.
 
 The main organizer and sponsor of the competition is Sberbank. \
 Organizer and task developer is Alliance for Artificial Intelligence.
