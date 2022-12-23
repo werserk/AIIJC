@@ -52,7 +52,11 @@ Let's see how it works in images:
 
 ## Results
 
-...
+![](.images/website.png)
+
+|            image             |      base opencv adaptive thresholding      |         ours adaptive thresholding          |
+|:----------------------------:|:-------------------------------------------:|:-------------------------------------------:|
+| ![](.images/slice_image.png) | ![](.images/base_adaptive_thresholding.png) | ![](.images/ours_adaptive_thresholding.png) |
 
 ## Run code
 
