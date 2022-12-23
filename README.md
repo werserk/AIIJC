@@ -1,4 +1,4 @@
-# AIIJC. The "AI in Medicine" competition track"
+# AIIJC. The "AI in Medicine" competition track
 
 ## Competiton overview
 
