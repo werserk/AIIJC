@@ -60,9 +60,12 @@ Let's see how it works in images:
 
 ## Run code
 
-First of all set up your environment with
-Install folder with model
-checkpoints: [link](https://drive.google.com/file/d/19svztOBB4RhnW7cwuZTDPZb0EiWKdydN/view?usp=sharing)
+Clone this repository
+```bash
+git clone https://github.com/werserk/AIIJC-med-1st-place.git
+```
+
+Install folder with model checkpoints: [link](https://drive.google.com/file/d/19svztOBB4RhnW7cwuZTDPZb0EiWKdydN/view?usp=sharing)(could be unavailable, contact me)
 
 ```bash
 pip install -r requirements.txt
